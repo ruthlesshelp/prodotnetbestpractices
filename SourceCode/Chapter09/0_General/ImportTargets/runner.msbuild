@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Default"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+         ToolsVersion="4.0">
+
+  <Import Project=".\Build\ImportTargets\Common.Targets"/>
+
+  <Target Name="Default"
+          DependsOnTargets="Preconditions">
+    <Message Condition="Exists('$(BinariesOutputPath)')" Importance="high"
+             Text="Yes, the '$(BinariesOutputPath)' folder exists."
+             />
+    <Error Condition="!Exists('$(BinariesOutputPath)')"
+             Text="No, the '$(BinariesOutputPath)' folder does NOT exist."
+             />
+  </Target>
+</Project>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Rebuild" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <MSBuildCommunityTasksPath>.</MSBuildCommunityTasksPath>
+    <ExtensionTasksPath>.\</ExtensionTasksPath>
+  </PropertyGroup>
+
+  <!-- Required Import to use tasks and targets -->
+  <Import Project="..\Build\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+  <Import Project="..\Build\MSBuildExtensionPack\MSBuild.ExtensionPack.tasks"/>
+
+  <PropertyGroup>
+    <ToolsPath>C:\Tools</ToolsPath>
+    <ProjectName>Lender.Slos</ProjectName>
+
+    <BuildPath Condition=" '$(BuildPath)'==''">.\Build</BuildPath>
+
+    <ArtifactsPath Condition=" '$(ArtifactsPath)'==''">.\Artifacts</ArtifactsPath>
+    <FlattenPath>$(ArtifactsPath)\Flatten</FlattenPath>
+    <PreservePath>$(ArtifactsPath)\Preserve</PreservePath>
+
+    <!-- Define Constants for Conditional Compilation -->
+    <DefineConstants Condition=" '$(DefineConstants)'==''">DEBUG;TRACE</DefineConstants>
+      
+  </PropertyGroup>
+
+  <!-- Target for Preconditions -->
+  <Target Name="Preconditions" >
+    <RemoveDir Condition="Exists('$(ArtifactsPath)')"
+               Directories="$(ArtifactsPath)"
+               />
+               
+    <MakeDir Condition="!Exists('$(ArtifactsPath)')"
+             Directories="$(ArtifactsPath)"
+             />
+
+    <MakeDir Condition="!Exists('$(FlattenPath)')"
+             Directories="$(FlattenPath)"
+             />
+
+    <MakeDir Condition="!Exists('$(PreservePath)')"
+             Directories="$(PreservePath)"
+             />
+
+  </Target>
+
+  <!-- Define Constants for Building -->
+  <ItemGroup>
+    <SolutionToBuild Include=".\$(ProjectName).Express.sln" />
+
+  </ItemGroup>
+
+  <!-- Target for Building -->
+  <Target Name="Rebuild"
+          DependsOnTargets="Build;CopyToFlatten;CopyToPreserve;Package"
+          />
+
+  <Target Name="Build"
+          DependsOnTargets="Preconditions"
+          >
+
+    <PropertyGroup>
+      <SolutionNames>@(SolutionToBuild)</SolutionNames>
+
+    </PropertyGroup>
+
+    <MSBuild Projects="@(SolutionToBuild)"
+             Targets="Rebuild"
+             Properties="Configuration=$(Configuration);DefineConstants=$(DefineConstants)"
+             />
+
+    <WriteLinesToFile File="$(ProjectName).log"
+                      Lines="Done."
+                      />
+  </Target>
+
+  <Target Name="CopyToFlatten" >
+    <PropertyGroup>
+      <SourceFolder>.\Lender.Slos.Financial\bin\$(Configuration)</SourceFolder>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ContentExclude Include="$(SourceFolder)\**\*.pdb" />
+      <ContentExclude Include="$(SourceFolder)\**\*.gif" />
+      <ContentExclude Include="$(SourceFolder)\**\Webcontrol_*.bmp" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ContentFiles Include="$(SourceFolder)\**"
+                    Exclude="@(ContentExclude)"
+                    />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(ContentFiles)" DestinationFolder="$(FlattenPath)" />
+
+  </Target>
+
+  <Target Name="CopyToPreserve" >
+    <PropertyGroup>
+      <SourceFolder>.\Lender.Slos.Financial\bin\$(Configuration)</SourceFolder>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ContentExclude Include="$(SourceFolder)\**\*.pdb" />
+      <ContentExclude Include="$(SourceFolder)\**\*.gif" />
+      <ContentExclude Include="$(SourceFolder)\**\Webcontrol_*.bmp" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ContentFiles Include="$(SourceFolder)\**"
+                    Exclude="@(ContentExclude)"
+                    />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(ContentFiles)"
+          DestinationFiles="@(ContentFiles->'$(PreservePath)\%(RecursiveDir)%(Filename)%(Extension)')"
+          />
+  </Target>
+
+  <Target Name="Package">
+    <ItemGroup>
+      <FilesToZip Include="$(PreservePath)\**\*.*"
+                  Exclude="$(ArtifactsPath)\**\*.zip"
+                  />
+    </ItemGroup>
+
+    <Zip Files="@(FilesToZip)"
+         WorkingDirectory="$(ArtifactsPath)"
+         ZipFileName="$(ArtifactsPath)\$(ProjectName).$(Configuration).v$(BUILD_NUMBER).zip"
+         ZipLevel="9"
+         />
+  </Target>
+
+</Project>

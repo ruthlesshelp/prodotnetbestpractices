@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Rebuild" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <MSBuildCommunityTasksPath>.</MSBuildCommunityTasksPath>
+    <ExtensionTasksPath>.\</ExtensionTasksPath>
+  </PropertyGroup>
+
+  <!-- Required Import to use tasks and targets -->
+  <Import Project="..\Build\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+  <Import Project="..\Build\MSBuildExtensionPack\MSBuild.ExtensionPack.tasks"/>
+
+  <PropertyGroup>
+    <ToolsPath>C:\Tools</ToolsPath>
+    <ProjectName>Lender.Slos</ProjectName>
+	<SourceFolder>.</SourceFolder>
+
+    <BuildPath Condition=" '$(BuildPath)'==''">.\Build</BuildPath>
+
+    <ArtifactsPath Condition=" '$(ArtifactsPath)'==''">.\Artifacts</ArtifactsPath>
+    <OutputPath Condition="'$(OutputPath)' == ''">$(ArtifactsPath)\Output</OutputPath>
+
+    <!-- Define Constants for Conditional Compilation -->
+    <DefineConstants Condition=" '$(DefineConstants)'==''">DEBUG;TRACE</DefineConstants>
+
+    <BUILD_NUMBER Condition=" '$(BUILD_NUMBER)'==''">3.5.7.11</BUILD_NUMBER>
+      
+  </PropertyGroup>
+
+  <!-- Target for Preconditions -->
+  <Target Name="Preconditions" >
+    <MakeDir Condition="!Exists('$(ArtifactsPath)')"
+             Directories="$(ArtifactsPath)"
+             />
+
+    <MakeDir Condition="!Exists('$(OutputPath)')"
+             Directories="$(OutputPath)"
+             />
+
+    <Delete Condition="Exists('$(ProjectName).log')"
+            Files="$(ProjectName).log"
+            />
+
+    <!-- The lines are semicolon separated -->
+    <WriteLinesToFile File="$(ProjectName).log"
+                      Lines="This is the first line;This is the second line with a semicolon (%3B) character;This is the third line"
+                      />
+
+  </Target>
+
+  <!-- Define Constants for Building -->
+  <ItemGroup>
+    <SolutionToBuild Include="$(SourceFolder)\$(ProjectName).Express.sln" />
+    <SolutionToBuild Include="$(SourceFolder)\Solutions\$(ProjectName).Example1.sln" />
+    <SolutionToBuild Include="$(SourceFolder)\Solutions\$(ProjectName).Example2.sln" />
+
+  </ItemGroup>
+
+  <!-- Target for Building -->
+  <Target Name="Rebuild"
+          DependsOnTargets="SetUp;Build;CleanUp"
+          />
+
+  <Target Name="SetUp"
+          DependsOnTargets="AssemblyInformation"
+          />
+
+  <Target Name="AssemblyInformation" >
+    <ItemGroup>
+      <AssemblyInfoFiles Include="$(SourceFolder)\**\AssemblyInfo.cs" />
+    </ItemGroup>
+
+    <Time Format="yyyy">
+      <Output TaskParameter="FormattedTime" PropertyName="CurrentYear" />
+    </Time>
+
+    <PropertyGroup>
+      <AssemblyCompany>Lender Inc.</AssemblyCompany>
+      <AssemblyCopyright>© $(CurrentYear) $(AssemblyCompany) All rights reserved.</AssemblyCopyright>
+      <AssemblyVersion>$(BUILD_NUMBER)</AssemblyVersion>
+      <AssemblyFileVersion>$(BUILD_NUMBER)</AssemblyFileVersion>
+    </PropertyGroup>
+
+    <MSBuild.ExtensionPack.Framework.AssemblyInfo
+      AssemblyInfoFiles="@(AssemblyInfoFiles)"
+      AssemblyCompany="$(AssemblyCompany)"
+      AssemblyCopyright="$(AssemblyCopyright)"
+      AssemblyVersion="$(AssemblyVersion)"
+      AssemblyFileVersion="$(AssemblyFileVersion)"
+      />
+  </Target>
+
+  <Target Name="Build"
+          DependsOnTargets="Preconditions"
+          >
+
+    <WriteLinesToFile File="$(ProjectName).log"
+                      Lines="Rebuilding ... "
+                      />
+
+    <PropertyGroup>
+      <SolutionNames>@(SolutionToBuild)</SolutionNames>
+
+    </PropertyGroup>
+
+    <WriteLinesToFile File="$(ProjectName).log"
+                      Lines="$(SolutionNames)'"
+                      />
+
+    <MSBuild Projects="@(SolutionToBuild)"
+             Targets="Rebuild"
+             Properties="Configuration=$(Configuration);DefineConstants=$(DefineConstants)"
+             />
+
+    <WriteLinesToFile File="$(ProjectName).log"
+                      Lines="Done."
+                      />
+  </Target>
+
+  <Target Name="CleanUp" >
+    <Delete Condition="!Exists('$(OutputPath)\$(ProjectName).log')"
+            Files="$(OutputPath)\$(ProjectName).log"
+            />
+			
+    <ItemGroup>
+	  <SourceFiles Include="$(SourceFolder)\$(ProjectName).Financial\bin\$(Configuration)\*.dll" />
+	  <SourceFiles Include="$(SourceFolder)\Tests.Unit.$(ProjectName).Financial\bin\$(Configuration)\*.dll" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(SourceFiles)"
+          DestinationFolder="$(OutputPath)"
+          />
+
+    <Copy SourceFiles="$(ProjectName).log"
+          DestinationFolder="$(OutputPath)"
+          />
+
+  </Target>
+
+</Project>

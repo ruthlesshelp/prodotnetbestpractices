@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Default"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+         ToolsVersion="4.0">
+
+  <Import Project=".\Build\ImportTargets\MSBuild.Inline.Tasks.Targets"/>
+
+  <PropertyGroup>
+    <Values>16.37|11.13|1129.7057|2.417|6569.1</Values>
+  </PropertyGroup>
+
+  <Target Name="Example1">
+    <ExecuteSum Input="$(Values)">
+      <Output PropertyName="SumFromTask" TaskParameter="TaskMessage"/>
+    </ExecuteSum>
+
+    <Message Text="Sum from 'ExecuteSum' task: $(SumFromTask)"
+             Importance="high"
+             />
+  </Target>
+
+  <Target Name="Example2">
+    <Minimum Input="$(Values)">
+      <Output PropertyName="ResultFromTask" TaskParameter="Result"/>
+    </Minimum>
+
+    <Message Text="Minimum value from 'Minimum' task: $(ResultFromTask)"
+             Importance="high"
+             />
+  </Target>
+
+  <ItemGroup>
+    <Source Include=".\Content\**\*.gif"/>
+  </ItemGroup>
+
+  <Target Name="Example3">
+    <Message Text="Reporting the full path for each file:"
+             Importance="high"
+             />
+    <ReportFullPath Input="@(Source)" />
+  </Target>
+
+  <Target Name="Default" DependsOnTargets="Example1;Example2;Example3" />
+
+</Project>

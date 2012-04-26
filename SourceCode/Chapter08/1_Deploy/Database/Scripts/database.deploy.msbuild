@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="DbDeploy" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <File Include="$(MSBuildProjectDirectory)\$(ScriptDirectory)\$(ScriptRunOrderFilename)" />
+    
+  </ItemGroup>
+
+  <PropertyGroup>
+    <ServerName>(local)\SQLExpress</ServerName>
+    <UseDatabaseName>Lender.Slos</UseDatabaseName>
+
+    <SqlToolsRoot Condition=" '$(SqlToolsRoot)'==''">C:\Program Files\Microsoft SQL Server\100\Tools\Binn</SqlToolsRoot>
+    <SqlCmdExe>sqlcmd.exe</SqlCmdExe>
+    <ConnectionOptions>-E</ConnectionOptions>
+
+    <SqlCommand>$(SqlCmdExe) $(ConnectionOptions) -d $(UseDatabaseName) -S $(ServerName)</SqlCommand>
+    
+  </PropertyGroup>
+
+  <Target Name="DbDeploy" 
+          DependsOnTargets="ReadScriptRunOrderFile"
+          >
+    <Exec WorkingDirectory="$(SqlToolsRoot)"
+          Command="$(SqlCommand) -i $(MSBuildProjectDirectory)\$(ScriptDirectory)\%(FileContents.Identity)"
+          />
+
+  </Target>
+
+  <Target Name="ReadScriptRunOrderFile"
+          >
+    <ReadLinesFromFile File="@(File)"
+                       >
+      <Output TaskParameter="Lines" 
+              ItemName="FileContents"
+              />
+
+    </ReadLinesFromFile>
+
+  </Target>
+
+</Project>

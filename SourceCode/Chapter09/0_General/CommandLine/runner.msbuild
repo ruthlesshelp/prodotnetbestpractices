@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Default" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Target Name="Default">
+    <PropertyGroup>
+      <FolderName>My New Folder</FolderName>
+
+    </PropertyGroup>
+
+    <Exec Condition="Exists('$(FolderName)')"
+          Command="rmdir %22$(FolderName)%22" />
+
+    <Exec Command="mkdir %22$(FolderName)%22" />
+  </Target>
+
+</Project>

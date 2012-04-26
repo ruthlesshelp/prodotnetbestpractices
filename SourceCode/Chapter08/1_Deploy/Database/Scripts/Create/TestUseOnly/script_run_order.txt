@@ -1,0 +1,15 @@
+_drop.dbo.dal_Individual_Create.StoredProcedure.sql
+_drop.dbo.dal_Individual_Retrieve.StoredProcedure.sql
+_drop.dbo.dal_Individual_Update.StoredProcedure.sql
+_drop.dbo.dal_Individual_Delete.StoredProcedure.sql
+_drop.dbo.dal_Student_Create.StoredProcedure.sql
+_drop.dbo.dal_Student_Retrieve.StoredProcedure.sql
+_drop.dbo.dal_Student_Update.StoredProcedure.sql
+_drop.dbo.dal_Student_Delete.StoredProcedure.sql
+_drop.dbo.dal_Application_Create.StoredProcedure.sql
+_drop.dbo.dal_Application_Retrieve.StoredProcedure.sql
+_drop.dbo.dal_Application_Update.StoredProcedure.sql
+_drop.dbo.dal_Application_Delete.StoredProcedure.sql
+_drop.dbo.Application.Table.sql
+_drop.dbo.Student.Table.sql
+_drop.dbo.Individual.Table.sql

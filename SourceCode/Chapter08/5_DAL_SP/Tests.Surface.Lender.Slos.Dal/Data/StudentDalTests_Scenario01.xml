@@ -1,0 +1,25 @@
+<?xml version="1.0" standalone="yes"?>
+<Lender xmlns="http://tempuri.org/Lender.xsd">
+  <Individual>
+    <Id>3</Id>
+    <LastName>Smith</LastName>
+    <FirstName>John</FirstName>
+    <MiddleName>Q</MiddleName>
+    <Suffix>Sr.</Suffix>
+    <DateOfBirth>2011-01-01T00:00:00-05:00</DateOfBirth>
+  </Individual>
+  <Individual>
+    <Id>7</Id>
+    <LastName>Jones</LastName>
+    <FirstName>Paul</FirstName>
+    <MiddleName>R</MiddleName>
+    <Suffix>Jr.</Suffix>
+    <DateOfBirth>2011-03-05T00:00:00-05:00</DateOfBirth>
+  </Individual>
+  <Student>
+    <Id>3</Id>
+    <HighSchoolName>All American High</HighSchoolName>
+    <HighSchoolCity>Anytown</HighSchoolCity>
+    <HighSchoolState>NY</HighSchoolState>
+  </Student>
+</Lender>

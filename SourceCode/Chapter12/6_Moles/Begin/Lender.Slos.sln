@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lender.Slos.DataInterchange", "Lender.Slos.DataInterchange\Lender.Slos.DataInterchange.csproj", "{BC526745-C6BC-472C-B0DE-4E2A520FC495}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{404E0341-2748-41CB-B89E-81DD50083A4D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{0DFE369E-0089-4465-B86C-9C7620F0867B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Unit.Lender.Slos.DataInterchange", "Tests.Unit.Lender.Slos.DataInterchange\Tests.Unit.Lender.Slos.DataInterchange.csproj", "{50938616-1BA6-47B4-B018-2AB3FA0AB19D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC526745-C6BC-472C-B0DE-4E2A520FC495}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC526745-C6BC-472C-B0DE-4E2A520FC495}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC526745-C6BC-472C-B0DE-4E2A520FC495}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC526745-C6BC-472C-B0DE-4E2A520FC495}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50938616-1BA6-47B4-B018-2AB3FA0AB19D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50938616-1BA6-47B4-B018-2AB3FA0AB19D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50938616-1BA6-47B4-B018-2AB3FA0AB19D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50938616-1BA6-47B4-B018-2AB3FA0AB19D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0DFE369E-0089-4465-B86C-9C7620F0867B} = {404E0341-2748-41CB-B89E-81DD50083A4D}
+		{50938616-1BA6-47B4-B018-2AB3FA0AB19D} = {0DFE369E-0089-4465-B86C-9C7620F0867B}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Default"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+         ToolsVersion="4.0">
+
+  <Target Name="Default">
+    <PropertyGroup>
+      <Username>$(Registry:HKEY_CURRENT_USER\Volatile Environment@USERNAME)</Username>
+      <DotNetFxRoot>$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework@InstallRoot)</DotNetFxRoot>
+    </PropertyGroup>
+
+    <Message Text="Current user's login id: '$(Username)'"
+             Importance="high"
+             />
+    <Message Text=".NET Framework Installation Root: '$(DotNetFxRoot)'"
+             Importance="high"
+             />
+  </Target>
+
+</Project>

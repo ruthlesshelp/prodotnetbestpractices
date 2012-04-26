@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Lender.Slos.Financial.Moles</name>
+    </assembly>
+    <members>
+        <member name="T:Lender.Slos.Financial.Moles.MCalculator">
+            <summary>Mole type of <see cref="T:Lender.Slos.Financial.Calculator"/>
+            .</summary>
+        </member>
+        <member name="M:Lender.Slos.Financial.Moles.MCalculator.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:Lender.Slos.Financial.Moles.MCalculator.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:Lender.Slos.Financial.Moles.MCalculator.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:Lender.Slos.Financial.Moles.MCalculator.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:Lender.Slos.Financial.Moles.MCalculator.ComputePaymentPerPeriodDecimalDecimalInt32">
+            <summary>Sets the mole of <see cref="M:Lender.Slos.Financial.Calculator.ComputePaymentPerPeriod(System.Decimal,System.Decimal,System.Int32)"/>
+            </summary>
+        </member>
+        <member name="P:Lender.Slos.Financial.Moles.MCalculator.ComputeRatePerPeriodDecimal">
+            <summary>Sets the mole of <see cref="M:Lender.Slos.Financial.Calculator.ComputeRatePerPeriod(System.Decimal)"/>
+            </summary>
+        </member>
+    </members>
+</doc>

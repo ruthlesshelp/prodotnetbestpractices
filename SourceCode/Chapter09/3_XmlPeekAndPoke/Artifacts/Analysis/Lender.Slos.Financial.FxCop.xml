@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files\microsoft fxcop 10.0\Xml\FxCopReport.xsl"?>
+<FxCopReport Version="10.0">
+ <Namespaces>
+  <Namespace Name="Lender.Slos.Financial">
+   <Messages>
+    <Message Id="Slos" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="Breaking">
+     <Issue Name="Namespace" Certainty="75" Level="CriticalWarning">Correct the spelling of 'Slos' in namespace name 'Lender.Slos.Financial'.</Issue>
+    </Message>
+   </Messages>
+  </Namespace>
+ </Namespaces>
+ <Targets>
+  <Target Name="$(ProjectDir)/../../Lender.Slos.Financial/bin/Debug/Lender.Slos.Financial.dll">
+   <Modules>
+    <Module Name="lender.slos.financial.dll">
+     <Messages>
+      <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+       <Issue Name="NoStrongName" Certainty="95" Level="CriticalError">Sign 'Lender.Slos.Financial.dll' with a strong name key.</Issue>
+      </Message>
+      <Message Id="Slos" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="Breaking">
+       <Issue Name="Assembly" Certainty="75" Level="CriticalWarning">Correct the spelling of 'Slos' in assembly name 'Lender.Slos.Financial.dll'.</Issue>
+      </Message>
+      <Message TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+       <Issue Certainty="95" Level="Error">Mark 'Lender.Slos.Financial.dll' with CLSCompliant(true) because it exposes externally visible types.</Issue>
+      </Message>
+     </Messages>
+     <Namespaces>
+      <Namespace Name="Lender.Slos.Financial">
+       <Types>
+        <Type Name="Calculator" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#ComputePaymentPerPeriod(System.Decimal,System.Decimal,System.Int32)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="fakeDisposable" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="55">'Calculator.ComputePaymentPerPeriod(decimal, decimal, int)' declares a variable, 'fakeDisposable', of type 'FakeDisposable', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message TypeName="RethrowToPreserveStackDetails" Category="Microsoft.Usage" CheckId="CA2200" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Error" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="69">'Calculator.ComputePaymentPerPeriod(decimal, decimal, int)' rethrows a caught exception and specifies it explicitly as an argument. Use 'throw' without an argument instead, in order to preserve the stack location where the exception was initially raised.</Issue>
+            </Message>
+            <Message Id="System.String.Format(System.String,System.Object)" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Name="IFormatProviderAlternateString" Certainty="95" Level="Error" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="45">Because the behavior of 'string.Format(string, object)' could vary based on the current user's locale settings, replace this call in 'Calculator.ComputePaymentPerPeriod(decimal, decimal, int)' with a call to 'string.Format(IFormatProvider, string, params object[])'. If the result of 'string.Format(IFormatProvider, string, params object[])' will be displayed to the user, specify 'CultureInfo.CurrentCulture' as the 'IFormatProvider' parameter. Otherwise, if the result will be stored and accessed by software, such as when it is persisted to disk or to a database, specify 'CultureInfo.InvariantCulture'.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#ComputeRatePerPeriod(System.Decimal)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="System.String.Format(System.String,System.Object)" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Name="IFormatProviderAlternateString" Certainty="95" Level="Error" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="21">Because the behavior of 'string.Format(string, object)' could vary based on the current user's locale settings, replace this call in 'Calculator.ComputeRatePerPeriod(decimal)' with a call to 'string.Format(IFormatProvider, string, params object[])'. If the result of 'string.Format(IFormatProvider, string, params object[])' will be displayed to the user, specify 'CultureInfo.CurrentCulture' as the 'IFormatProvider' parameter. Otherwise, if the result will be stored and accessed by software, such as when it is persisted to disk or to a database, specify 'CultureInfo.InvariantCulture'.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#TooManyVariables()" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="AvoidExcessiveLocals" Category="Microsoft.Performance" CheckId="CA1809" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' has 65 local variables, some of which may have been generated by the compiler. Refactor 'Calculator.TooManyVariables()' so that it uses fewer than 64 local variables.</Issue>
+            </Message>
+            <Message Id="v1" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v1', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v10" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v10', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v11" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v11', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v12" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v12', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v13" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v13', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v14" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v14', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v15" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v15', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v16" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v16', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v17" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v17', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v18" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v18', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v19" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v19', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v2" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v2', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v20" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v20', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v21" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v21', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v22" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v22', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v23" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v23', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v24" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v24', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v25" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v25', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v26" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v26', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v27" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v27', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v28" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v28', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v29" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v29', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v3" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v3', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v30" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v30', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v31" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v31', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v32" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v32', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v33" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v33', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v34" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v34', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v35" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v35', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v36" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v36', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v37" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v37', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v38" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v38', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v39" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v39', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v4" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v4', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v40" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v40', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v41" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v41', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v42" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v42', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v43" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v43', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v44" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v44', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v45" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v45', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v46" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v46', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v47" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v47', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v48" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v48', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v49" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v49', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v5" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v5', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v50" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v50', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v51" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v51', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v52" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v52', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v53" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v53', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v54" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v54', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v55" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v55', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v56" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v56', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v57" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v57', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v58" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v58', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v59" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v59', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v6" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v6', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v60" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v60', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v61" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v61', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v62" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v62', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v63" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v63', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v64" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v64', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v65" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v65', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v7" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v7', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v8" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v8', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+            <Message Id="v9" TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="Calculator.cs" Line="77">'Calculator.TooManyVariables()' declares a variable, 'v9', of type 'int', which is never used or is only assigned to. Use this variable or remove it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="FakeDisposable" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Finalize()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotRaiseExceptionsInUnexpectedLocations" Category="Microsoft.Design" CheckId="CA1065" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="NonBreaking">
+             <Issue Name="NoAllowedExceptions" Certainty="90" Level="Error" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="FakeDisposable.cs" Line="24">'FakeDisposable.~FakeDisposable()' creates an exception of type 'InvalidOperationException'. Exceptions should not be raised in this type of method. If this exception instance might be raised, change this method's logic so it no longer raises an exception.</Issue>
+            </Message>
+            <Message TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063" Status="Active" Created="2011-07-12 01:12:29Z" FixCategory="Breaking">
+             <Issue Name="FinalizeImplementation" Certainty="95" Level="Error" Path="c:\Samples\Ch13\1_FxCop\Lender.Slos.Financial" File="FakeDisposable.cs" Line="20">Modify 'FakeDisposable.~FakeDisposable()' so that it calls Dispose(false) and then returns.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210">
+   <Name>Assemblies should have valid strong names</Name>
+   <Description>Either the assembly has no strong name, an invalid one, or the strong name is valid only because of the computer configuration. The assembly should not be deployed in this state. The most common causes of this are: 1) The assembly's contents were modified after it was signed. 2) The signing process failed. 3) The assembly was delay-signed. 4) A registry key existed that allowed the check to pass (where it would not have otherwise).</Description>
+   <Resolution Name="NoStrongName">Sign {0} with a strong name key.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182127(VS.100).aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">CriticalError</MessageLevel>
+   <File Name="DesignRules.dll" Version="10.0.0.0" />
+  </Rule>
+  <Rule TypeName="AvoidExcessiveLocals" Category="Microsoft.Performance" CheckId="CA1809">
+   <Name>Avoid excessive locals</Name>
+   <Description>Method implementations should not contain more than 64 local variables. In order for the run-time to enregister local variables most efficiently, there should be 64 or fewer of them. Enregistering based on flow analysis will not occur for locals in excess of 64, which may result in slower performance.</Description>
+   <Resolution Name="Default">{0} has {1} local variables, some of which may have been generated by the compiler. Refactor {0} so that it uses fewer than 64 local variables.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182263(VS.100).aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Warning</MessageLevel>
+   <File Name="PerformanceRules.dll" Version="10.0.0.0" />
+  </Rule>
+  <Rule TypeName="DoNotRaiseExceptionsInUnexpectedLocations" Category="Microsoft.Design" CheckId="CA1065">
+   <Name>Do not raise exceptions in unexpected locations</Name>
+   <Description>Do not explicitly raise exceptions from unexpected locations. There are some methods, such as Equals and GetHashCode, which users do not expect to raise exceptions. Therefore calls to these methods are not commonly wrapped in try catch blocks.</Description>
+   <Resolution Name="NoAllowedExceptions">{0} creates an exception of type {1}. Exceptions should not be raised in this type of method. If this exception instance might be raised, change this method's logic so it no longer raises an exception.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/bb386039(VS.100).aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="90">Error, Warning</MessageLevel>
+   <File Name="DesignRules.dll" Version="10.0.0.0" />
+  </Rule>
+  <Rule TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704">
+   <Name>Identifiers should be spelled correctly</Name>
+   <Description>The individual words that make up an identifier should not be abbreviated and should be spelled correctly. If this rule generates a false positive on a term that should be recognized, add the word to the FxCop custom dictionary.</Description>
+   <Resolution Name="Assembly">Correct the spelling of '{0}' in assembly name {1}.</Resolution>
+   <Resolution Name="Namespace">Correct the spelling of '{0}' in namespace name '{1}'.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/bb264492(VS.100).aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="75">CriticalWarning</MessageLevel>
+   <File Name="NamingRules.dll" Version="10.0.0.0" />
+  </Rule>
+  <Rule TypeName="ImplementIDisposableCorrectly" Category="Microsoft.Design" CheckId="CA1063">
+   <Name>Implement IDisposable correctly</Name>
+   <Description>All IDisposable types should implement the Dispose pattern correctly.</Description>
+   <Resolution Name="FinalizeImplementation">Modify {0} so that it calls Dispose(false) and then returns.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms244737(VS.100).aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="DesignRules.dll" Version="10.0.0.0" />
+  </Rule>
+  <Rule TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014">
+   <Name>Mark assemblies with CLSCompliantAttribute</Name>
+   <Description>Assemblies should explicitly state their CLS compliance using the CLSCompliant attribute. An assembly without this attribute is not CLS-compliant. Assemblies, modules, and types can be CLS-compliant even if some parts of the assembly, module, or type are not CLS-compliant. The following rules apply: 1) If the element is marked CLSCompliant, any noncompliant members must have the CLSCompliant attribute present with its argument set to false. 2) A comparable CLS-compliant alternative member must be supplied for each member that is not CLS-compliant.</Description>
+   <Resolution Name="Default">Mark {0} with CLSCompliant(true) because it exposes externally visible types.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182156(VS.100).aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="DesignRules.dll" Version="10.0.0.0" />
+  </Rule>
+  <Rule TypeName="RemoveUnusedLocals" Category="Microsoft.Performance" CheckId="CA1804">
+   <Name>Remove unused locals</Name>
+   <Description>Remove locals that are not used or are only assigned to in method implementations.</Description>
+   <Resolution Name="Default">{0} declares a variable, {1}, of type {2}, which is never used or is only assigned to. Use this variable or remove it.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182278(VS.100).aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Warning</MessageLevel>
+   <File Name="PerformanceRules.dll" Version="10.0.0.0" />
+  </Rule>
+  <Rule TypeName="RethrowToPreserveStackDetails" Category="Microsoft.Usage" CheckId="CA2200">
+   <Name>Rethrow to preserve stack details</Name>
+   <Description>Use the IL rethrow instruction to preserve original stack details when re-raising a caught exception.</Description>
+   <Resolution Name="Default">{0} rethrows a caught exception and specifies it explicitly as an argument. Use 'throw' without an argument instead, in order to preserve the stack location where the exception was initially raised.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182363(VS.100).aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="UsageRules.dll" Version="10.0.0.0" />
+  </Rule>
+  <Rule TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305">
+   <Name>Specify IFormatProvider</Name>
+   <Description>If an overload exists that takes an IFormatProvider argument, it should always be called in favor of an overload that does not. Some methods in the runtime convert a value to or from a string representation and take a string parameter that contains one or more characters, called format specifiers, which indicate how the value is to be converted. If the meaning of the format specifier varies by culture, a formatting object supplies the actual characters used in the string representation. In scenarios where sorting and comparison behavior should never change between cultures, specify CultureInfo.InvariantCulture, otherwise, specify CultureInfo.CurrentCulture.</Description>
+   <Resolution Name="IFormatProviderAlternateString">Because the behavior of {0} could vary based on the current user's locale settings, replace this call in {1} with a call to {2}. If the result of {2} will be displayed to the user, specify {3} as the 'IFormatProvider' parameter. Otherwise, if the result will be stored and accessed by software, such as when it is persisted to disk or to a database, specify {4}.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182190(VS.100).aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="GlobalizationRules.dll" Version="10.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">Category</String>
+  <String Key="Certainty">Certainty</String>
+  <String Key="CollapseAll">Collapse All</String>
+  <String Key="CheckId">Check Id</String>
+  <String Key="Error">Error</String>
+  <String Key="Errors">error(s)</String>
+  <String Key="ExpandAll">Expand All</String>
+  <String Key="Help">Help</String>
+  <String Key="Line">Line</String>
+  <String Key="Messages">message(s)</String>
+  <String Key="LocationNotStoredInPdb">[Location not stored in Pdb]</String>
+  <String Key="Project">Project</String>
+  <String Key="Resolution">Resolution</String>
+  <String Key="Rule">Rule</String>
+  <String Key="RuleFile">Rule File</String>
+  <String Key="RuleDescription">Rule Description</String>
+  <String Key="Source">Source</String>
+  <String Key="Status">Status</String>
+  <String Key="Target">Target</String>
+  <String Key="Warning">Warning</String>
+  <String Key="Warnings">warning(s)</String>
+  <String Key="ReportTitle">Code Analysis Report</String>
+ </Localized>
+</FxCopReport>

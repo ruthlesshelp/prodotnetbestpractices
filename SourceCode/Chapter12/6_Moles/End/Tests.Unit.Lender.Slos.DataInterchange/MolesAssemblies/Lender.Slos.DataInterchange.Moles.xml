@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Lender.Slos.DataInterchange.Moles</name>
+    </assembly>
+    <members>
+        <member name="T:Lender.Slos.DataInterchange.Moles.MExport">
+            <summary>Mole type of <see cref="T:Lender.Slos.DataInterchange.Export"/>
+            .</summary>
+        </member>
+        <member name="M:Lender.Slos.DataInterchange.Moles.MExport.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:Lender.Slos.DataInterchange.Moles.MExport.#ctor(Lender.Slos.DataInterchange.Export)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:Lender.Slos.DataInterchange.Moles.MExport.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:Lender.Slos.DataInterchange.Moles.MExport.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MExport.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MExport.Constructor">
+            <summary>Sets the mole of <see cref="M:Lender.Slos.DataInterchange.Export.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MExport.DataGet">
+            <summary>Sets the mole of <see cref="P:Lender.Slos.DataInterchange.Export.Data"/>
+            </summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MExport.DataSetString">
+            <summary>Sets the mole of <see cref="P:Lender.Slos.DataInterchange.Export.Data"/>
+            </summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MExport.SaveFileInfo">
+            <summary>Sets the mole of <see cref="M:Lender.Slos.DataInterchange.Export.Save(System.IO.FileInfo)"/>
+            </summary>
+        </member>
+        <member name="T:Lender.Slos.DataInterchange.Moles.MExport.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MExport.AllInstances.DataGet">
+            <summary>Sets the mole of <see cref="P:Lender.Slos.DataInterchange.Export.Data"/>
+            </summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MExport.AllInstances.DataSetString">
+            <summary>Sets the mole of <see cref="P:Lender.Slos.DataInterchange.Export.Data"/>
+            </summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MExport.AllInstances.SaveFileInfo">
+            <summary>Sets the mole of <see cref="M:Lender.Slos.DataInterchange.Export.Save(System.IO.FileInfo)"/>
+            </summary>
+        </member>
+        <member name="T:Lender.Slos.DataInterchange.Moles.MFileSystem">
+            <summary>Mole type of <see cref="T:Lender.Slos.DataInterchange.FileSystem"/>
+            .</summary>
+        </member>
+        <member name="M:Lender.Slos.DataInterchange.Moles.MFileSystem.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:Lender.Slos.DataInterchange.Moles.MFileSystem.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:Lender.Slos.DataInterchange.Moles.MFileSystem.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MFileSystem.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MFileSystem.ReadAllTextFileInfo">
+            <summary>Sets the mole of <see cref="M:Lender.Slos.DataInterchange.FileSystem.ReadAllText(System.IO.FileInfo)"/>
+            </summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MFileSystem.WriteAllTextFileInfoString">
+            <summary>Sets the mole of <see cref="M:Lender.Slos.DataInterchange.FileSystem.WriteAllText(System.IO.FileInfo,System.String)"/>
+            </summary>
+        </member>
+        <member name="T:Lender.Slos.DataInterchange.Moles.MImport">
+            <summary>Mole type of <see cref="T:Lender.Slos.DataInterchange.Import"/>
+            .</summary>
+        </member>
+        <member name="M:Lender.Slos.DataInterchange.Moles.MImport.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:Lender.Slos.DataInterchange.Moles.MImport.#ctor(Lender.Slos.DataInterchange.Import)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:Lender.Slos.DataInterchange.Moles.MImport.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:Lender.Slos.DataInterchange.Moles.MImport.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MImport.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MImport.Constructor">
+            <summary>Sets the mole of <see cref="M:Lender.Slos.DataInterchange.Import.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MImport.DataGet">
+            <summary>Sets the mole of <see cref="P:Lender.Slos.DataInterchange.Import.Data"/>
+            </summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MImport.DataSetString">
+            <summary>Sets the mole of <see cref="P:Lender.Slos.DataInterchange.Import.Data"/>
+            </summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MImport.LoadFileInfo">
+            <summary>Sets the mole of <see cref="M:Lender.Slos.DataInterchange.Import.Load(System.IO.FileInfo)"/>
+            </summary>
+        </member>
+        <member name="T:Lender.Slos.DataInterchange.Moles.MImport.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MImport.AllInstances.DataGet">
+            <summary>Sets the mole of <see cref="P:Lender.Slos.DataInterchange.Import.Data"/>
+            </summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MImport.AllInstances.DataSetString">
+            <summary>Sets the mole of <see cref="P:Lender.Slos.DataInterchange.Import.Data"/>
+            </summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.MImport.AllInstances.LoadFileInfo">
+            <summary>Sets the mole of <see cref="M:Lender.Slos.DataInterchange.Import.Load(System.IO.FileInfo)"/>
+            </summary>
+        </member>
+        <member name="T:Lender.Slos.DataInterchange.Moles.SExport">
+            <summary>Stub type of <see cref="T:Lender.Slos.DataInterchange.Export"/>
+            .</summary>
+        </member>
+        <member name="M:Lender.Slos.DataInterchange.Moles.SExport.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:Lender.Slos.DataInterchange.Moles.SExport.InitializeStub">
+            <summary>Initializes a new instance of type SExport</summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.SExport.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.SExport.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:Lender.Slos.DataInterchange.Moles.SImport">
+            <summary>Stub type of <see cref="T:Lender.Slos.DataInterchange.Import"/>
+            .</summary>
+        </member>
+        <member name="M:Lender.Slos.DataInterchange.Moles.SImport.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:Lender.Slos.DataInterchange.Moles.SImport.InitializeStub">
+            <summary>Initializes a new instance of type SImport</summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.SImport.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:Lender.Slos.DataInterchange.Moles.SImport.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+    </members>
+</doc>

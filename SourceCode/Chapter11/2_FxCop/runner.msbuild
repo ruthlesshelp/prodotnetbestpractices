@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <MSBuildCommunityTasksPath>.</MSBuildCommunityTasksPath>
+  </PropertyGroup>
+
+  <!-- Required Import to use MSBuild Community Tasks -->
+  <Import Project=".\Build\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+  
+  <PropertyGroup>
+    <ToolsPath>C:\Tools</ToolsPath>
+    <ProjectName>Lender.Slos</ProjectName>
+
+    <BuildPath Condition=" '$(BuildPath)'==''">.\Build</BuildPath>
+
+    <ArtifactsPath Condition=" '$(ArtifactsPath)'==''">.\Artifacts</ArtifactsPath>
+    <AnalysisOutputPath Condition="'$(AnalysisOutputPath)' == ''">$(ArtifactsPath)\Analysis</AnalysisOutputPath>
+
+    <!-- Define Constants for FxCop -->
+    <FxCopRoot Condition="'$(FxCopRoot)' == ''">C:\Program Files (x86)\Microsoft FxCop 10.0</FxCopRoot>
+
+    <!-- Define Constants for Conditional Compilation -->
+    <DefineConstants Condition=" '$(DefineConstants)'==''">DEBUG;TRACE</DefineConstants>
+
+  </PropertyGroup>
+
+  <!-- Target for Preconditions -->
+  <Target Name="Preconditions" >
+    <MakeDir Condition="!Exists('$(ArtifactsPath)')"
+             Directories="$(ArtifactsPath)"
+             />
+
+    <MakeDir Condition="!Exists('$(AnalysisOutputPath)')"
+             Directories="$(AnalysisOutputPath)"
+             />
+
+  </Target>
+
+  <!-- Define Constants for Building -->
+  <ItemGroup>
+    <ProjectToBuild Include=".\$(ProjectName).Express.sln" />
+    <!--<ProjectToBuild Include=".\$(ProjectName).sln" />-->
+
+  </ItemGroup>
+
+  <!-- Target for Building -->
+  <Target Name="Rebuild"
+          DependsOnTargets="Build"
+          />
+
+  <Target Name="Build" 
+          DependsOnTargets="Preconditions" 
+          >
+    <MSBuild Projects="@(ProjectToBuild)"
+             Targets="Rebuild"
+             Properties="Configuration=$(Configuration);DefineConstants=$(DefineConstants)"
+             />
+
+  </Target>
+
+  <Target Name="Analyze"
+          DependsOnTargets="FxCopAnalysis;FxCopMonitoring" />
+  
+  <!-- Define Constants for FxCop -->
+  <PropertyGroup>
+    <FxCopCriticalErrors>0</FxCopCriticalErrors>
+    <FxCopErrors>0</FxCopErrors>
+    <FxCopCriticalWarnings>0</FxCopCriticalWarnings>
+    <FxCopWarnings>0</FxCopWarnings>
+
+    <FxCopMandatoryProject>$(BuildPath)\FxCop\Lender.Slos.Financial.Mandatory.FxCop</FxCopMandatoryProject>
+    <FxCopMandatoryXmlOutput>$(AnalysisOutputPath)\Lender.Slos.Financial.Mandatory.FxCop.xml</FxCopMandatoryXmlOutput>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FxCopAttribute Include="Item">
+      <ProjectFile>$(BuildPath)\FxCop\Lender.Slos.Financial.FxCop</ProjectFile>
+      <XmlOutput>$(AnalysisOutputPath)\Lender.Slos.Financial.FxCop.xml</XmlOutput>
+    </FxCopAttribute>
+
+    <FxCopAttribute Include="Item">
+      <ProjectFile>$(FxCopMandatoryProject)</ProjectFile>
+      <XmlOutput>$(FxCopMandatoryXmlOutput)</XmlOutput>
+    </FxCopAttribute>
+
+  </ItemGroup>
+
+  <Target Name="FxCopMonitoring"
+          Condition="Exists('$(FxCopMandatoryProject)')"
+          DependsOnTargets="FxCopAnalysis"
+          >
+    <Message Text="Processing FxCopXmlReport file '$(FxCopMandatoryXmlOutput)'" />
+
+    <XmlRead ContinueOnError="True"
+      XmlFileName="$(FxCopMandatoryXmlOutput)"
+      XPath="string(count(//Issue[@Level='CriticalError']))">
+      <Output TaskParameter="Value" PropertyName="FxCopCriticalErrors" />
+    </XmlRead>
+
+    <XmlRead ContinueOnError="True"
+      XmlFileName="$(FxCopMandatoryXmlOutput)"
+      XPath="string(count(//Issue[@Level='Error']))">
+      <Output TaskParameter="Value" PropertyName="FxCopErrors" />
+    </XmlRead>
+
+    <XmlRead ContinueOnError="True"
+      XmlFileName="$(FxCopMandatoryXmlOutput)"
+      XPath="string(count(//Issue[@Level='CriticalWarning']))">
+      <Output TaskParameter="Value" PropertyName="FxCopCriticalWarnings" />
+    </XmlRead>
+
+    <XmlRead ContinueOnError="True"
+      XmlFileName="$(FxCopMandatoryXmlOutput)"
+      XPath="string(count(//Issue[@Level='Warning']))">
+      <Output TaskParameter="Value" PropertyName="FxCopWarnings" />
+    </XmlRead>
+
+    <Warning Condition="$(FxCopCriticalErrors) &gt; 0"
+             Text="FxCop encountered $(FxCopCriticalErrors) Critical Error(s)" />
+    <Warning Condition="$(FxCopErrors) &gt; 0"
+             Text="FxCop encountered $(FxCopErrors) Error(s)" />
+    <Warning Condition="$(FxCopCriticalWarnings) &gt; 0"
+             Text="FxCop encountered $(FxCopCriticalWarnings) Critical Warning(s)" />
+    <Warning Condition="$(FxCopWarnings) &gt; 0" 
+             Text="FxCop encountered $(FxCopWarnings) Warning(s)" />
+
+    <Error Condition="$(FxCopCriticalErrors) &gt; 0 OR $(FxCopErrors) &gt; 0 OR $(FxCopCriticalWarnings) &gt; 0 OR $(FxCopWarnings) &gt; 0"
+           Text="FxCop found violations: Critical Errors=$(FxCopCriticalErrors), Errors=$(FxCopErrors), Critical Warnings=$(FxCopCriticalWarnings), Warnings=$(FxCopWarnings)" />
+
+  </Target>
+
+  <Target Name="FxCopAnalysis" 
+          DependsOnTargets="Preconditions"
+          >
+    <Message Condition="Exists('%(FxCopAttribute.ProjectFile)')"
+             Text="Processing FxCop project file '%(FxCopAttribute.ProjectFile)'" />
+
+    <Message Condition="!Exists('%(FxCopAttribute.ProjectFile)')"
+             Text="Cannot find FxCop project file '%(FxCopAttribute.ProjectFile)'" />
+
+    <Exec Condition="Exists('%(FxCopAttribute.ProjectFile)')"
+          Command="&quot;$(FxCopRoot)\FxCopCmd.exe&quot; /project:%(FxCopAttribute.ProjectFile) /fo /out:%(FxCopAttribute.XmlOutput)"
+          WorkingDirectory="." />
+
+  </Target>
+
+</Project>

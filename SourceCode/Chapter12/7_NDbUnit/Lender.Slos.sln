@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lender.Slos.Dal", "Lender.Slos.Dal\Lender.Slos.Dal.csproj", "{6A480A45-04A9-4B92-AC7F-EF7C1851EA64}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8ABF9EF2-D22B-4482-9453-7B2919355486}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{C543341C-B543-49E8-A330-8FA54B8D089E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Unit.Lender.Slos.Dal", "Tests.Unit.Lender.Slos.Dal\Tests.Unit.Lender.Slos.Dal.csproj", "{1BF14821-B92D-43FA-8552-98AED7B242E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A480A45-04A9-4B92-AC7F-EF7C1851EA64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A480A45-04A9-4B92-AC7F-EF7C1851EA64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A480A45-04A9-4B92-AC7F-EF7C1851EA64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A480A45-04A9-4B92-AC7F-EF7C1851EA64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BF14821-B92D-43FA-8552-98AED7B242E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BF14821-B92D-43FA-8552-98AED7B242E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BF14821-B92D-43FA-8552-98AED7B242E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BF14821-B92D-43FA-8552-98AED7B242E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C543341C-B543-49E8-A330-8FA54B8D089E} = {8ABF9EF2-D22B-4482-9453-7B2919355486}
+		{1BF14821-B92D-43FA-8552-98AED7B242E3} = {C543341C-B543-49E8-A330-8FA54B8D089E}
+	EndGlobalSection
+EndGlobal

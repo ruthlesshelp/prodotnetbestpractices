@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <ToolsPath>C:\Tools</ToolsPath>
+    <ProjectName>Lender.Slos</ProjectName>
+
+    <ArtifactsPath Condition=" '$(ArtifactsPath)'==''">.\Artifacts</ArtifactsPath>
+    <TestResultsOutputPath Condition="'$(TestResultsPath)' == ''">$(ArtifactsPath)\TestResults</TestResultsOutputPath>
+
+    <!-- Define Constants for NUnit -->
+    <NUnitRoot Condition=" '$(NUnitRoot)'==''">$(ToolsPath)\NUnit\v2.5.10.11092\bin\net-2.0</NUnitRoot>
+    <NUnitConsole>$(NUnitRoot)\nunit-console.exe</NUnitConsole>
+    <NUnitOutputXmlFiles>$(TestResultsOutputPath)\Tests.*.xml</NUnitOutputXmlFiles>
+    <NUnitAdditionalArgs>/noshadow /framework=net-4.0</NUnitAdditionalArgs>
+
+    <!-- Define Constants for Conditional Compilation -->
+    <DefineConstants Condition=" '$(DefineConstants)'==''">DEBUG;TRACE;SUPPRESS_MANUAL_TESTS</DefineConstants>
+
+  </PropertyGroup>
+
+  <!-- Define Constants for Testing -->
+  <ItemGroup>
+    <!-- Run the Tests.Unit.* -->
+    <TestRunAttribute Include="Item">
+      <TestFramework>TestsNotImplemented</TestFramework>
+      <TestRunnerAdditionalArgs>$(NUnitAdditionalArgs)</TestRunnerAdditionalArgs>
+      <TestAssemblyFile>.\Tests.Unit.$(ProjectName).Model\bin\$(Configuration)\Tests.Unit.$(ProjectName).Model.dll</TestAssemblyFile>
+      <TestXmlOutput>$(TestResultsOutputPath)\Tests.Unit.$(ProjectName).Model-results.xml</TestXmlOutput>
+
+    </TestRunAttribute>
+
+    <!-- Run the Tests.Surface.* -->
+    <TestRunAttribute Include="Item">
+      <TestFramework>TestsNotImplemented</TestFramework>
+      <TestRunnerAdditionalArgs>$(NUnitAdditionalArgs)</TestRunnerAdditionalArgs>
+      <TestAssemblyFile>.\Tests.Surface.$(ProjectName).Dal\bin\$(Configuration)\Tests.Surface.$(ProjectName).Dal.dll</TestAssemblyFile>
+      <TestXmlOutput>$(TestResultsOutputPath)\Tests.Surface.$(ProjectName).Dal-results.xml</TestXmlOutput>
+
+    </TestRunAttribute>
+
+  </ItemGroup>
+
+
+  <!-- Target for Preconditions -->
+  <Target Name="Preconditions" >
+    <MakeDir Condition="!Exists('$(ArtifactsPath)')"
+             Directories="$(ArtifactsPath)"
+             />
+
+    <MakeDir Condition="!Exists('$(TestResultsOutputPath)')"
+             Directories="$(TestResultsOutputPath)"
+             />
+
+  </Target>
+
+  <!-- Define Constants for Building -->
+  <ItemGroup>
+    <ProjectToBuild Include=".\$(ProjectName).Express.sln" />
+    <!--<ProjectToBuild Include=".\$(ProjectName).sln" />-->
+
+  </ItemGroup>
+
+  <!-- Target for Building -->
+  <Target Name="Rebuild"
+          DependsOnTargets="Build"
+          />
+
+  <Target Name="Build" 
+          DependsOnTargets="Preconditions" 
+          >
+    <MSBuild Projects="@(ProjectToBuild)"
+             Targets="Rebuild"
+             Properties="Configuration=$(Configuration);DefineConstants=$(DefineConstants)"
+             />
+
+  </Target>
+
+  <!-- Target for Testing -->
+  <Target Name="Test" 
+          DependsOnTargets="Preconditions"
+          >
+    <Exec Condition=" '%(TestRunAttribute.TestFramework)'=='NUnit'"
+          ContinueOnError="false"
+          Command="&quot;$(NUnitConsole)&quot; &quot;%(TestRunAttribute.TestAssemblyFile)&quot; /xml=&quot;%(TestRunAttribute.TestXmlOutput)&quot; $(NUnitAdditionalArgs)"
+          WorkingDirectory="." />
+
+  </Target>
+
+</Project>

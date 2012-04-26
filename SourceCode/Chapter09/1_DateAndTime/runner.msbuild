@@ -1,0 +1,98 @@
+<Project ToolsVersion="4.0" DefaultTargets="DateAndTime" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <MSBuildCommunityTasksPath>.</MSBuildCommunityTasksPath>
+    <ExtensionTasksPath>.\</ExtensionTasksPath>
+  </PropertyGroup>
+
+  <!-- Required Import to use tasks and targets -->
+  <Import Project="..\Build\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+  <Import Project="..\Build\MSBuildExtensionPack\MSBuild.ExtensionPack.tasks"/>
+
+  <PropertyGroup>
+    <DeploymentTargetPath>..\Artifacts\Output</DeploymentTargetPath>
+    <DeploymentTargetFolder>$(DeploymentTargetPath)\Build</DeploymentTargetFolder>
+
+    <ImportantDate>13 Nov 2003</ImportantDate>
+
+  </PropertyGroup>
+
+  <Target Name="DateAndTime">
+
+    <Message Text="Using the MSBuild property functions to get the current date and time" Importance="high" />
+    <PropertyGroup>
+      <TodaysDate>$([System.DateTime]::Today.ToString("dddd, MMMM dd, yyyy"))</TodaysDate>
+      <CurrentTime>$([System.DateTime]::Now.ToString("h:mm:ss tt"))</CurrentTime>
+    </PropertyGroup>
+    <Message Text="    Today's date is: $(TodaysDate)" Importance="high" />
+    <Message Text="    Current time is: $(CurrentTime)" Importance="high" />
+
+    <Message Text="Using the MSBuild Community Tasks target to get the current date and time" Importance="high" />
+    <Time Format="dddd, MMMM dd, yyyy">
+      <Output TaskParameter="FormattedTime" PropertyName="CommunityDate" />
+    </Time>
+    <Time Format="h:mm:ss tt">
+      <Output TaskParameter="FormattedTime" PropertyName="CommunityTime" />
+    </Time>
+    <Message Text="    Today's date is: $(CommunityDate)" Importance="high" />
+    <Message Text="    Current time is: $(CommunityTime)" Importance="high" />
+
+    <Message Text="Using the MSBuild ExtensionPack DateAndTime task to get the current date and time" Importance="high" />
+    <MSBuild.ExtensionPack.Framework.DateAndTime TaskAction="Get" Format="dddd, MMMM dd, yyyy">
+      <Output TaskParameter="Result" PropertyName="ExtensionPackDate"/>
+    </MSBuild.ExtensionPack.Framework.DateAndTime>
+    <MSBuild.ExtensionPack.Framework.DateAndTime TaskAction="Get" Format="h:mm:ss tt">
+      <Output TaskParameter="Result" PropertyName="ExtensionPackTime"/>
+    </MSBuild.ExtensionPack.Framework.DateAndTime>
+    <Message Text="    Today's date is: $(ExtensionPackDate)" Importance="high" />
+    <Message Text="    Current time is: $(ExtensionPackTime)" Importance="high" />
+
+    <!-- Example of a deployment task -->
+    <Time Format="dddd, MMMM dd, yyyy h:mm:ss tt">
+      <Output TaskParameter="FormattedTime" PropertyName="DeploymentStart" />
+    </Time>
+    <Message Text="Starting the deployment: $(DeploymentStart)" Importance="high" />
+    <Message Text="Preparing the deployment folder '$(DeploymentTargetFolder)'" Importance="high" />
+
+    <Time Format="yyyy_MM_dd_HH_mm_ss">
+      <Output TaskParameter="FormattedTime" PropertyName="BackupSuffix" />
+    </Time>
+    <PropertyGroup>
+      <DeploymentTargetBackup>__backup_$(BackupSuffix)</DeploymentTargetBackup>
+    </PropertyGroup>
+
+    <!-- Perform the backup -->
+    <Message Text="Backing up the files to '$(DeploymentTargetBackup)'" Importance="high" />
+
+    <MSBuild.ExtensionPack.Framework.DateAndTime TaskAction="Get" Format="dd MMM yy HH:mm:ss">
+      <Output TaskParameter="Result" PropertyName="BackupStartTime"/>
+    </MSBuild.ExtensionPack.Framework.DateAndTime>
+    <MSBuild.ExtensionPack.Framework.Thread TaskAction="Sleep" Timeout="1499"/>
+    <MSBuild.ExtensionPack.Framework.DateAndTime TaskAction="GetElapsed" Start="$(BackupStartTime)" Format="Seconds">
+      <Output TaskParameter="Result" PropertyName="BackupElapsedTime"/>
+    </MSBuild.ExtensionPack.Framework.DateAndTime>
+    <Message Text="Backup is done. Elapsed time: $([System.Math]::Round($(BackupElapsedTime),1)) seconds." Importance="high" />
+
+    <!-- Perform the deployment -->
+    <Message Text="Starting the deployment to '$(DeploymentTargetFolder)'" Importance="high" />
+    <MSBuild.ExtensionPack.Framework.DateAndTime TaskAction="Get" Format="dd MMM yy HH:mm:ss">
+      <Output TaskParameter="Result" PropertyName="DeployStartTime"/>
+    </MSBuild.ExtensionPack.Framework.DateAndTime>
+    <MSBuild.ExtensionPack.Framework.Thread TaskAction="Sleep" Timeout="2503"/>
+    <MSBuild.ExtensionPack.Framework.DateAndTime TaskAction="GetElapsed" Start="$(DeployStartTime)" Format="Seconds">
+      <Output TaskParameter="Result" PropertyName="DeployElapsedTime"/>
+    </MSBuild.ExtensionPack.Framework.DateAndTime>
+    <Message Text="Deployment is done. Elapsed time: $([System.Math]::Round($(DeployElapsedTime),1)) seconds." Importance="high" />
+
+    <!-- Fun stuff ImportantDate -->
+    <MSBuild.ExtensionPack.Framework.DateAndTime TaskAction="GetElapsed" Start="$(ImportantDate)" Format="Days">
+      <Output TaskParameter="Result" PropertyName="ElapsedResult"/>
+    </MSBuild.ExtensionPack.Framework.DateAndTime>
+    <Message Text="The number of days that have elapsed since '$(ImportantDate)' are $([System.Math]::Round($(ElapsedResult),0)) days."/>
+
+    <MSBuild.ExtensionPack.Framework.DateAndTime TaskAction="GetElapsed" Start="$(ImportantDate)" Format="Hours">
+      <Output TaskParameter="Result" PropertyName="ElapsedResult"/>
+    </MSBuild.ExtensionPack.Framework.DateAndTime>
+    <Message Text="The number of hours that have elapsed since '$(ImportantDate)' are $([System.Math]::Round($(ElapsedResult),0)) hours."/>
+  </Target>
+</Project>

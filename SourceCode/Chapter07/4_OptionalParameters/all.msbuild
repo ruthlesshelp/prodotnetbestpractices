@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <ProjectName>Lender.Slos</ProjectName>
+
+    <ArtifactsPath Condition=" '$(ArtifactsPath)'==''">.\Artifacts</ArtifactsPath>
+    <BinariesOutputPath Condition="'$(BinariesOutputPath)' == ''">$(ArtifactsPath)\Binaries</BinariesOutputPath>
+
+    <!-- Define Constants for Conditional Compilation -->
+    <DefineConstants Condition=" '$(DefineConstants)'==''">DEBUG;TRACE;SUPPRESS_MANUAL_TESTS</DefineConstants>
+
+  </PropertyGroup>
+
+  <!-- Define Constants for Building -->
+  <ItemGroup>
+    <ProjectToBuild Include=".\$(ProjectName).Express.sln" />
+  </ItemGroup>
+
+  <!-- Target for Building -->
+  <Target Name="Build">
+    <MSBuild Projects="@(ProjectToBuild)"
+             Targets="Rebuild"
+             Properties="Configuration=$(Configuration);DefineConstants=$(DefineConstants)"
+             />
+
+    <ItemGroup>
+      <BinariesToCopy Include=".\$(ProjectName)\bin\$(Configuration)\*.dll" />
+      <BinariesToCopy Include=".\Tests.Unit.$(ProjectName)\bin\$(Configuration)\*.dll" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesOutputPath)" />
+  </Target>
+
+</Project>

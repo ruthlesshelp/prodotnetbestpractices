@@ -1,0 +1,140 @@
+<Project ToolsVersion="4.0" DefaultTargets="XmlPeekAndPoke" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <MSBuildCommunityTasksPath>.</MSBuildCommunityTasksPath>
+    <ExtensionTasksPath>.\</ExtensionTasksPath>
+  </PropertyGroup>
+
+  <!-- Required Import to use tasks and targets -->
+  <Import Project="..\Build\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+  <Import Project="..\Build\MSBuildExtensionPack\MSBuild.ExtensionPack.tasks"/>
+
+  <PropertyGroup>
+    <AnalysisPath>.\Artifacts\Analysis</AnalysisPath>
+
+    <ServerName Condition="'$(ServerName)'==''">Server1</ServerName>
+    <DatabaseName Condition="'$(DatabaseName)'==''">Database1</DatabaseName>
+    <UserId Condition="'$(UserId)'==''">UserId1</UserId>
+    <Password Condition="'$(Password)'==''">Password1</Password>
+
+    <FxCopXmlOutput>$(AnalysisPath)\Lender.Slos.Financial.FxCop.xml</FxCopXmlOutput>
+    
+  </PropertyGroup>
+
+  <Target Name="XmlPeekAndPoke"
+          DependsOnTargets="UpdateConnectionStrings;UpdateAppSettings;FxCopReport"
+          />
+
+
+  <!-- Update App.config 'connectionStrings' section -->
+  <Target Name="UpdateConnectionStrings">
+    <PropertyGroup>
+      <ConfigFile>.\App.config</ConfigFile>
+      <ConnectionKey>Lender.Slos.Express</ConnectionKey>
+      <ConnectionString>Data Source=$(ServerName);Initial Catalog=$(DatabaseName);User Id=$(UserId);Password=$(Password);Trusted_Connection=False;</ConnectionString>
+
+    </PropertyGroup>
+
+    <Error Condition="!Exists('$(ConfigFile)')"
+           Text="Config file not found '$(ConfigFile)'" />
+
+    <XmlUpdate ContinueOnError="False"
+               XPath="/configuration/connectionStrings/add[@name='$(ConnectionKey)']/@connectionString"
+               XmlFileName="$(ConfigFile)"
+               Value="$(ConnectionString)"
+               />
+
+    <Message Text="Connection string updated successfully in '$(ConfigFile)'" />
+
+  </Target>
+
+  <!-- Update App.config 'appSettings' section -->
+  <ItemGroup>
+    <AppSettings Include="Item" >
+      <ConfigFile>.\App.config</ConfigFile>
+      <Key>ImportantServiceUrl</Key>
+      <Value>http://web-services.example.com/Important.Services</Value>
+    </AppSettings>
+
+    <AppSettings Include="Item" >
+      <ConfigFile>.\App.config</ConfigFile>
+      <Key>ImportantFolderUri</Key>
+      <Value>\\server\important\folder</Value>
+    </AppSettings>
+
+  </ItemGroup>
+
+  <Target Name="UpdateAppSettings">
+    <Error Condition="!Exists('%(AppSettings.ConfigFile)')"
+           Text="Config file not found '%(AppSettings.ConfigFile)'" />
+
+    <XmlUpdate ContinueOnError="False"
+               XPath="/configuration/appSettings/add[@key='%(AppSettings.Key)']/@value"
+               XmlFileName="%(AppSettings.ConfigFile)"
+               Value="%(AppSettings.Value)"
+               />
+
+    <Message Text="AppSettings key='%(AppSettings.Key)' updated to value='%(AppSettings.Value)' in the file '%(AppSettings.ConfigFile)'" />
+
+  </Target>
+
+  <!-- Read FxCop.xml report -->
+  <Target Name="FxCopReport" >
+    <Message Text="Processing FxCop report file '$(FxCopXmlOutput)'" />
+
+    <PropertyGroup>
+      <FxCopCriticalErrors>0</FxCopCriticalErrors>
+      <FxCopErrors>0</FxCopErrors>
+      <FxCopCriticalWarnings>0</FxCopCriticalWarnings>
+      <FxCopWarnings>0</FxCopWarnings>
+
+	  <FxCopCriticalErrorThreshold>0</FxCopCriticalErrorThreshold>
+      <FxCopErrorThreshold>0</FxCopErrorThreshold>
+      <FxCopCriticalWarningThreshold>5</FxCopCriticalWarningThreshold>
+      <FxCopWarningThreshold>15</FxCopWarningThreshold>
+    </PropertyGroup>
+
+    <XmlRead ContinueOnError="True"
+      XmlFileName="$(FxCopXmlOutput)"
+      XPath="string(count(//Issue[@Level='CriticalError']))">
+      <Output TaskParameter="Value" PropertyName="FxCopCriticalErrors" />
+    </XmlRead>
+
+    <XmlRead ContinueOnError="True"
+      XmlFileName="$(FxCopXmlOutput)"
+      XPath="string(count(//Issue[@Level='Error']))">
+      <Output TaskParameter="Value" PropertyName="FxCopErrors" />
+    </XmlRead>
+
+    <XmlRead ContinueOnError="True"
+      XmlFileName="$(FxCopXmlOutput)"
+      XPath="string(count(//Issue[@Level='CriticalWarning']))">
+      <Output TaskParameter="Value" PropertyName="FxCopCriticalWarnings" />
+    </XmlRead>
+
+    <XmlRead ContinueOnError="True"
+      XmlFileName="$(FxCopXmlOutput)"
+      XPath="string(count(//Issue[@Level='Warning']))">
+      <Output TaskParameter="Value" PropertyName="FxCopWarnings" />
+    </XmlRead>
+
+    <Warning Text="FxCop encountered $(FxCopCriticalErrors) Critical Errors" Condition="$(FxCopCriticalErrors) &gt; 0" />
+    <Warning Text="FxCop encountered $(FxCopErrors) Errors" Condition="$(FxCopErrors) &gt; 0" />
+    <Warning Text="FxCop encountered $(FxCopCriticalWarnings) Critical Warnings" Condition="$(FxCopCriticalWarnings) &gt; 0" />
+    <Warning Text="FxCop encountered $(FxCopWarnings) Warnings" Condition="$(FxCopWarnings) &gt; 0" />
+
+    <Error Condition="$(FxCopCriticalErrors) &gt; $(FxCopCriticalErrorThreshold)"
+           Text="FxCop: $(FxCopCriticalErrors) Critical Errors exceeds the threshold of $(FxCopCriticalErrorThreshold)." 
+           />
+    <Error Condition="$(FxCopErrors) &gt; $(FxCopErrorThreshold)"
+           Text="FxCop: $(FxCopErrors) Critical Errors exceeds the threshold of $(FxCopErrorThreshold)." 
+           />
+    <Error Condition="$(FxCopCriticalWarnings) &gt; $(FxCopCriticalWarningThreshold)"
+           Text="FxCop: $(FxCopCriticalWarnings) Critical Errors exceeds the threshold of $(FxCopCriticalWarningThreshold)." 
+           />
+    <Error Condition="$(FxCopWarnings) &gt; $(FxCopWarningThreshold)"
+           Text="FxCop: $(FxCopWarnings) Critical Errors exceeds the threshold of $(FxCopWarningThreshold)." 
+           />
+  </Target>
+
+</Project>

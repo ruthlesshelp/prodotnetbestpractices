@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="First;Second;Third"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+         ToolsVersion="4.0"
+         >
+  <PropertyGroup>
+    <GlobalProperty>DEBUG</GlobalProperty>
+  </PropertyGroup>
+
+  <Target Name="First">
+    <Message Text="In the First target the global property is: '$(GlobalProperty)'"
+             Importance="high"
+             />
+    <Message Text="In the First target the local property is: '$(LocalProperty)'"
+             Importance="high"
+             />
+  </Target>
+
+  <Target Name="Second">
+    <PropertyGroup>
+      <LocalProperty>Lender.Slos</LocalProperty>
+    </PropertyGroup>
+
+    <Message Text="In the Second target the global property is: '$(GlobalProperty)'"
+             Importance="high"
+             />
+    <Message Text="In the Second target the local property is: '$(LocalProperty)'"
+             Importance="high"
+             />
+  </Target>
+
+  <Target Name="Third">
+    <Message Text="In the Third target the global property is: '$(GlobalProperty)'"
+             Importance="high"
+             />
+    <Message Text="In the Third target the local property is: '$(LocalProperty)'"
+             Importance="high"
+             />
+  </Target>
+</Project>

@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lender.Slos.Financial", "Lender.Slos.Financial\Lender.Slos.Financial.csproj", "{AB19A318-5326-4A8D-AAFA-B42E684E8506}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C697CE0C-AE8A-4F6D-A1F4-3B291FCD1464}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{7528B5A5-6E69-4A14-8C77-507550929D94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Unit.Lender.Slos.Financial", "Tests.Unit.Lender.Slos.Financial\Tests.Unit.Lender.Slos.Financial.csproj", "{5C7490DA-8F4A-4B0C-9277-BD22117EDD68}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{21A3D7E1-024B-4681-952E-5292CC984C48}"
+	ProjectSection(SolutionItems) = preProject
+		runner.msbuild = runner.msbuild
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB19A318-5326-4A8D-AAFA-B42E684E8506}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB19A318-5326-4A8D-AAFA-B42E684E8506}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB19A318-5326-4A8D-AAFA-B42E684E8506}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB19A318-5326-4A8D-AAFA-B42E684E8506}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C7490DA-8F4A-4B0C-9277-BD22117EDD68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C7490DA-8F4A-4B0C-9277-BD22117EDD68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C7490DA-8F4A-4B0C-9277-BD22117EDD68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C7490DA-8F4A-4B0C-9277-BD22117EDD68}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7528B5A5-6E69-4A14-8C77-507550929D94} = {C697CE0C-AE8A-4F6D-A1F4-3B291FCD1464}
+		{5C7490DA-8F4A-4B0C-9277-BD22117EDD68} = {7528B5A5-6E69-4A14-8C77-507550929D94}
+	EndGlobalSection
+EndGlobal

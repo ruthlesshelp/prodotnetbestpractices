@@ -1,0 +1,24 @@
+<?xml version="1.0" standalone="yes"?>
+<Lender xmlns="http://tempuri.org/Lender.xsd">
+  <Individual>
+    <Id>3</Id>
+    <LastName>Smith</LastName>
+    <FirstName>John</FirstName>
+    <MiddleName>Q</MiddleName>
+    <Suffix>Sr.</Suffix>
+    <DateOfBirth>2011-01-01T00:00:00-05:00</DateOfBirth>
+  </Individual>
+  <Student>
+    <Id>3</Id>
+    <HighSchoolName>All American High</HighSchoolName>
+    <HighSchoolCity>Anytown</HighSchoolCity>
+    <HighSchoolState>NY</HighSchoolState>
+  </Student>
+  <Application>
+    <Id>5</Id>
+    <StudentId>3</StudentId>
+    <Principal>17000.00</Principal>
+    <AnnualPercentageRate>7.8</AnnualPercentageRate>
+    <TotalPayments>120</TotalPayments>
+  </Application>
+</Lender>

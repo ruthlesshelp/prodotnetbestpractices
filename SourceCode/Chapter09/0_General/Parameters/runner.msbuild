@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Default"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+         ToolsVersion="4.0">
+
+  <PropertyGroup>
+    <ParamOne Condition=" '$(ParamOne)'==''">(value not set)</ParamOne>
+    <ParamTwo Condition=" '$(ParamTwo)'==''">(value not set)</ParamTwo>
+    <ParamThree Condition=" '$(ParamThree)'==''">(value not set)</ParamThree>
+    <ParamFour Condition=" '$(ParamFour)'==''">(value not set)</ParamFour>
+  </PropertyGroup>
+
+  <Target Name="Default">
+    <Error Condition=" '$(ParamOne)'=='(value not set)'"
+           Text="Parameter 1 'ParamOne' must be set."
+           />
+
+    <Message Text="Parameter 1: '$(ParamOne)'"
+             Importance="high"
+             />
+    <Message Text="Parameter 2: '$(ParamTwo)'"
+             Importance="high"
+             />
+    <Message Text="Parameter 3: '$(ParamThree)'"
+             Importance="high"
+             />
+    <Message Text="Parameter 4: '$(ParamFour)'"
+             Importance="high"
+             />
+  </Target>
+
+</Project>

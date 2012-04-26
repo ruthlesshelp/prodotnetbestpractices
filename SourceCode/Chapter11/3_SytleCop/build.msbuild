@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Rebuild" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <BuildPath Condition=" '$(BuildPath)'==''">.\Build</BuildPath>
+    <BuildStyleCopTasksPath>$(BuildPath)\LenderBuildStyleCopTasks</BuildStyleCopTasksPath>
+
+    <!-- Define Constants for Conditional Compilation -->
+    <DefineConstants Condition=" '$(DefineConstants)'==''">DEBUG;TRACE</DefineConstants>
+
+  </PropertyGroup>
+
+  <!-- Target for Preconditions -->
+  <Target Name="Preconditions" >
+    <MakeDir Condition="!Exists('$(BuildStyleCopTasksPath)')"
+             Directories="$(BuildStyleCopTasksPath)"
+             />
+
+    <MakeDir Condition="!Exists('$(BuildStyleCopTasksPath)')"
+             Directories="$(BuildStyleCopTasksPath)"
+             />
+
+  </Target>
+
+  <!-- Define Constants for Building -->
+  <ItemGroup>
+    <ProjectToBuild Include=".\Lender.Build.StyleCop.Tasks\Lender.Build.StyleCop.Tasks.csproj" />
+
+  </ItemGroup>
+
+  <!-- Target for Building -->
+  <Target Name="Rebuild"
+          DependsOnTargets="Preconditions;Build;CopyToOutput"
+          />
+
+  <Target Name="Build"
+          DependsOnTargets="Preconditions"
+          >
+    <MSBuild Projects="@(ProjectToBuild)"
+             Targets="Rebuild"
+             Properties="Configuration=$(Configuration);DefineConstants=$(DefineConstants)"
+             />
+
+  </Target>
+
+  <!-- Target for CopyToOutput -->
+  <Target Name="CopyToOutput" >
+    <PropertyGroup>
+      <SourceFolder>.\Lender.Build.StyleCop.Tasks\bin\$(Configuration)</SourceFolder>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ContentExclude Include="$(SourceFolder)\**\*.pdb" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ContentFiles Include="$(SourceFolder)\**"
+                    Exclude="@(ContentExclude)"
+                    />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(ContentFiles)" DestinationFolder="$(BuildStyleCopTasksPath)" />
+
+  </Target>
+
+</Project>

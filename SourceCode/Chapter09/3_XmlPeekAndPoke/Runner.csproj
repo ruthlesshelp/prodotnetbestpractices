@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Default" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{7918ECB8-F40A-4BA4-942B-CAD3D61F426D}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="runner.msbuild" />
+  </ItemGroup>
+  <Target Name="Rebuild" DependsOnTargets="Clean;Build">
+    <Message Importance="high" Text="The 'Rebuild' target was called." />
+  </Target>
+  <Target Name="Build">
+    <Message Importance="high" Text="The 'Build' target was called." />
+  </Target>
+  <Target Name="Clean">
+    <Message Importance="high" Text="The 'Clean' target was called." />
+  </Target>
+  <Target Name="Default">
+    <Message Importance="high" Text="The 'Default' target was called." />
+  </Target>
+</Project>

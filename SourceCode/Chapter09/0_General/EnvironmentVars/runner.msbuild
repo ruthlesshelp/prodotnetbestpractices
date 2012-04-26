@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Default"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+         ToolsVersion="4.0">
+
+  <Target Name="Default">
+    <PropertyGroup>
+      <FxCopRoot Condition=" '$(FxCopRoot)'==''">(value not set)</FxCopRoot>
+    </PropertyGroup>
+
+    <Error Condition=" '$(FxCopRoot)'=='(value not set)'"
+           Text="Environment variable 'FxCopRoot' must be set."
+           />
+    <Message Text="FxCop Installation Root: '$(FxCopRoot)'"
+             Importance="high"
+             />
+    <Message Text="Windows Directory: '$(windir)'"
+             Importance="high"
+             />
+  </Target>
+
+</Project>

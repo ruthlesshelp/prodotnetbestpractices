@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <BuildPath Condition=" '$(BuildPath)'==''">.\Build</BuildPath>
+  </PropertyGroup>
+
+  <!-- Required Import to use Custom StyleCop Tasks -->
+  <Import Project="$(BuildPath)\LenderBuildStyleCopTasks\Lender.Build.StyleCop.Tasks.Targets"/>
+  
+  <PropertyGroup>
+    <ToolsPath>C:\Tools</ToolsPath>
+    <ProjectName>Lender.Slos</ProjectName>
+
+    <ArtifactsPath Condition=" '$(ArtifactsPath)'==''">.\Artifacts</ArtifactsPath>
+    <AnalysisOutputPath Condition="'$(AnalysisOutputPath)' == ''">$(ArtifactsPath)\Analysis</AnalysisOutputPath>
+
+    <!-- Define Constants for FxCop -->
+    <FxCopRoot Condition="'$(FxCopRoot)' == ''">C:\Program Files (x86)\Microsoft FxCop 10.0</FxCopRoot>
+
+    <!-- Define Constants for Conditional Compilation -->
+    <DefineConstants Condition=" '$(DefineConstants)'==''">DEBUG;TRACE</DefineConstants>
+
+  </PropertyGroup>
+
+  <!-- Target for Preconditions -->
+  <Target Name="Preconditions" >
+    <MakeDir Condition="!Exists('$(ArtifactsPath)')"
+             Directories="$(ArtifactsPath)"
+             />
+
+    <MakeDir Condition="!Exists('$(AnalysisOutputPath)')"
+             Directories="$(AnalysisOutputPath)"
+             />
+
+  </Target>
+
+  <!-- Define Constants for Building -->
+  <ItemGroup>
+    <ProjectToBuild Include=".\$(ProjectName).Express.sln" />
+
+  </ItemGroup>
+
+  <!-- Target for Building -->
+  <Target Name="Rebuild"
+          DependsOnTargets="Build"
+          />
+
+  <Target Name="Build" 
+          DependsOnTargets="Preconditions" 
+          >
+    <MSBuild Projects="@(ProjectToBuild)"
+             Targets="Rebuild"
+             Properties="Configuration=$(Configuration);DefineConstants=$(DefineConstants)"
+             />
+
+  </Target>
+
+  <Target Name="Analyze"
+          DependsOnTargets="StyleCop" />
+  
+  <!-- Define Constants for StyleCop -->
+  <PropertyGroup>
+    <ProjectFullPath>.\Lender.Slos.Financial</ProjectFullPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ForceFullAnalysis>True</ForceFullAnalysis>
+    <TreatErrorsAsWarnings>False</TreatErrorsAsWarnings>
+    <CacheResults>False</CacheResults>
+    <OutputFile>$(AnalysisOutputPath)\Lender.Slos.Financial.StyleCop.xml</OutputFile>
+    <MaxViolationCount>0</MaxViolationCount>
+    <IgnoreVoluntaryRules>True</IgnoreVoluntaryRules>
+    <MandatoryRuleIds>SA1507;SA1107</MandatoryRuleIds>
+    <AlwaysIgnoredRuleIds>SA1512</AlwaysIgnoredRuleIds>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SourceFiles Include="**\*.cs" />
+
+  </ItemGroup>
+
+  <Target Name="StyleCop">
+    <StyleCopAnalysis ProjectFullPath="$(ProjectFullPath)"
+                      SourceFiles="@(SourceFiles)"
+                      ForceFullAnalysis="$(ForceFullAnalysis)"
+                      DefineConstants="$(DefineConstants)"
+                      TreatErrorsAsWarnings="$(TreatErrorsAsWarnings)"
+                      CacheResults="$(CacheResults)"
+                      OutputFile="$(OutputFile)"
+                      MaxViolationCount="$(MaxViolationCount)"
+                      IgnoreVoluntaryRules="$(IgnoreVoluntaryRules)"
+                      MandatoryRuleIds="$(MandatoryRuleIds)"
+                      AlwaysIgnoredRuleIds="$(AlwaysIgnoredRuleIds)"
+                      />
+
+  </Target>
+
+</Project>

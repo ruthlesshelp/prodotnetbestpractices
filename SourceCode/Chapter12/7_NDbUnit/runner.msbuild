@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0"
+         DefaultTargets="Build"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+         >
+  <PropertyGroup>
+    <ToolsPath>C:\Tools</ToolsPath>
+    <ProjectName>Lender.Slos</ProjectName>
+
+    <ArtifactsPath Condition=" '$(ArtifactsPath)'==''">.\Artifacts</ArtifactsPath>
+    <TestResultsOutputPath Condition="'$(TestResultsPath)' == ''">$(ArtifactsPath)\TestResults</TestResultsOutputPath>
+
+    <!-- Define Constants for NUnit -->
+    <NUnitRoot Condition=" '$(NUnitRoot)'==''">$(ToolsPath)\NUnit\v2.5.10.11092\bin\net-2.0</NUnitRoot>
+    <NUnitConsole>$(NUnitRoot)\nunit-console.exe</NUnitConsole>
+    <NUnitOutputXmlFiles>$(TestResultsOutputPath)\Tests.*.xml</NUnitOutputXmlFiles>
+    <NUnitAdditionalArgs>/noshadow /framework=net-4.0</NUnitAdditionalArgs>
+
+    <!-- Define Constants for MSTest -->
+    <MSTestRoot Condition=" '$(MSTestRoot)'==''">C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE</MSTestRoot>
+    <MSTestConsole>$(MSTestRoot)\MSTest.exe</MSTestConsole>
+    <MSTestAdditionalArgs></MSTestAdditionalArgs>
+
+    <!-- Define Constants for Gallio -->
+    <GallioRoot Condition=" '$(GallioRoot)'==''">C:\Program Files (x86)\Gallio\bin</GallioRoot>
+    <GallioConsole>$(GallioRoot)\Gallio.Echo.exe</GallioConsole>
+    <GallioAdditionalArgs></GallioAdditionalArgs>
+
+    <!-- Define Constants for xUnit.net -->
+    <xUnitRoot Condition="'$(xUnitRoot)'==''">$(ToolsPath)\xunit-1.8</xUnitRoot>
+    <xUnit_NetConsole Condition="'$(xUnit_NetConsole)'==''">$(xUnitRoot)\xunit.console.clr4.exe</xUnit_NetConsole>
+    <xUnit_NetOutputXmlFiles Condition="'$(xUnit_NetOutputXmlFiles)'==''">$(TestResultsOutputPath)\*.xml</xUnit_NetOutputXmlFiles>
+    <xUnit_NetAdditionalArgs Condition="'$(xUnit_NetAdditionalArgs)'==''">/noshadow</xUnit_NetAdditionalArgs>
+
+    <!-- Define Constants for Conditional Compilation -->
+    <DefineConstants Condition=" '$(DefineConstants)'==''">DEBUG;TRACE;SUPPRESS_MANUAL_TESTS</DefineConstants>
+
+  </PropertyGroup>
+
+  <!-- Define Constants for Testing -->
+  <ItemGroup>
+    <!-- Run the Tests.Unit.* -->
+    <TestRunAttribute Include="Item">
+      <TestFramework>NUnit</TestFramework>
+      <TestRunnerAdditionalArgs>$(NUnitAdditionalArgs)</TestRunnerAdditionalArgs>
+      <TestAssemblyFile>.\Tests.Unit.$(ProjectName).Dal\bin\$(Configuration)\Tests.Unit.$(ProjectName).Dal.dll</TestAssemblyFile>
+      <TestXmlOutput>$(TestResultsOutputPath)\Tests.Unit.$(ProjectName).Dal-results.xml</TestXmlOutput>
+
+    </TestRunAttribute>
+
+  </ItemGroup>
+
+
+  <!-- Target for Preconditions -->
+  <Target Name="Preconditions" >
+    <MakeDir Condition="!Exists('$(ArtifactsPath)')"
+             Directories="$(ArtifactsPath)"
+             />
+
+    <RemoveDir Condition="Exists('$(TestResultsOutputPath)')"
+               Directories="$(TestResultsOutputPath)"
+               />
+
+    <MakeDir Condition="!Exists('$(TestResultsOutputPath)')"
+             Directories="$(TestResultsOutputPath)"
+             />
+
+  </Target>
+
+  <!-- Define Constants for Building -->
+  <ItemGroup>
+    <ProjectToBuild Include=".\$(ProjectName).sln" />
+
+  </ItemGroup>
+
+  <!-- Target for Building -->
+  <Target Name="Rebuild"
+          DependsOnTargets="Build"
+          />
+
+  <Target Name="Build" 
+          DependsOnTargets="Preconditions" 
+          >
+    <MSBuild Projects="@(ProjectToBuild)"
+             Targets="Rebuild"
+             Properties="Configuration=$(Configuration);DefineConstants=$(DefineConstants)"
+             />
+
+  </Target>
+
+  <!-- Target for Testing -->
+  <Target Name="Test" 
+          DependsOnTargets="Preconditions"
+          >
+    <Exec Condition=" '%(TestRunAttribute.TestFramework)'=='NUnit'"
+          ContinueOnError="false"
+          Command="&quot;$(NUnitConsole)&quot; &quot;%(TestRunAttribute.TestAssemblyFile)&quot; /xml=&quot;%(TestRunAttribute.TestXmlOutput)&quot; %(TestRunAttribute.TestRunnerAdditionalArgs)"
+          WorkingDirectory="." />
+
+    <Exec Condition=" '%(TestRunAttribute.TestFramework)'=='MSTest'"
+          ContinueOnError="false"
+          Command="&quot;$(MSTestConsole)&quot; /testcontainer:&quot;%(TestRunAttribute.TestAssemblyFile)&quot; /resultsfile:&quot;%(TestRunAttribute.TestXmlOutput)&quot; %(TestRunAttribute.TestRunnerAdditionalArgs)"
+          WorkingDirectory="." />
+
+    <Exec Condition=" '%(TestRunAttribute.TestFramework)'=='Gallio'"
+          ContinueOnError="false"
+          Command="&quot;$(GallioConsole)&quot; &quot;%(TestRunAttribute.TestAssemblyFile)&quot; /rt:Xml /rd:&quot;$(TestResultsOutputPath)&quot; /rnf:%(TestRunAttribute.TestXmlReportNameFormat) %(TestRunAttribute.TestRunnerAdditionalArgs)"
+          WorkingDirectory="." />
+
+    <Exec Condition=" '%(TestRunAttribute.TestFramework)'=='xUnit.net'"
+          ContinueOnError="false"
+          Command="&quot;$(xUnit_NetConsole)&quot; &quot;%(TestRunAttribute.TestAssemblyFile)&quot; /nunit &quot;%(TestRunAttribute.TestXmlOutput)&quot; %(TestRunAttribute.TestRunnerAdditionalArgs)"
+          WorkingDirectory="."
+          />
+
+  </Target>
+
+</Project>
