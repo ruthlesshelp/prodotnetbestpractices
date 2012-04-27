@@ -1,6 +1,7 @@
-prodotnetbestpractices
-======================
-The sample code from the book "Pro .NET Best Practices" by Stephen D. Ritchie
+Pro .NET Best Practices
+=======================
+
+The sample code from the book *Pro .NET Best Practices* by Stephen D. Ritchie
 
 ISBN13: 978-1-4302-4023-5
 372 Pages
