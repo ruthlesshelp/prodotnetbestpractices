@@ -1,0 +1,4 @@
+Summary: Open source tasks for MSBuild
+License: BSD License
+More information: 
+http://msbuildtasks.tigris.org/
